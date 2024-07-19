@@ -59,13 +59,10 @@ app.post('/register', (req, res) => {
 
 
 
-
-if (process.env.NODE_ENV === "dev") {
-    const PORT = 3000;
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
-    });
-}
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
 
 // Export the app to be used by Netlify Functions
-export const handler = serverless(app)
+// export const handler = serverless(app)
