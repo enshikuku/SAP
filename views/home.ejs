@@ -53,7 +53,7 @@
             </div>
             <div class="nav-logo-links">
                 <button id="showButton" class="showButton"><img src="assets/images/chat.png" alt=""></button>
-                <a href="/register" class="register_btn">Register</a>
+                <a href="/register#register" class="register_btn">Register</a>
                 <section id="contactSection" class="contact-section">
                     <h2>Contact Us</h2>
                     <p>For inquiries, contact us at:</p>
@@ -62,12 +62,12 @@
                 </section>
                 <script>
                     document.getElementById('showButton').addEventListener('click', function() {
-                    var contactSection = document.getElementById('contactSection');
-                    if (contactSection.style.display === 'none' || contactSection.style.display === '') {
-                        contactSection.style.display = 'block'; // Show the contact section
-                    } else {
-                        contactSection.style.display = 'none'; // Hide the contact section
-                    }
+                        var contactSection = document.getElementById('contactSection');
+                        if (contactSection.style.display === 'none' || contactSection.style.display === '') {
+                            contactSection.style.display = 'block'; // Show the contact section
+                        } else {
+                            contactSection.style.display = 'none'; // Hide the contact section
+                        }
                     });
                 </script>
                 <div class="nav-btn">
@@ -78,10 +78,24 @@
         </div>
     </header>
     <% if(success){ %>
-        <p class="success">
+        <p id="success-message" class="success">
             <strong><%= message %></strong>
         </p>
-    <% } %>
+        <script>
+            function hideSuccessMessage() {
+                const message = document.getElementById('success-message')
+                if (message) {
+                    setTimeout(() => {
+                        message.style.opacity = '0'
+                        setTimeout(() => {
+                            message.style.display = 'none'
+                        }, 600)
+                    }, 6000)
+                }
+            }
+            hideSuccessMessage()
+        </script>
+    <% } %>    
     <div id="home">
         <div class="home_container">
             <div class="home__ title__">
@@ -147,7 +161,7 @@
             </ul>
         </p>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea placeat nisi explicabo ullam suscipit recusandae nobis dolore corrupti temporibus deleniti?</p>
-        <a href="/register" class="register_btn">Register</a>
+        <a href="/register#register" class="register_btn">Register</a>
     </div>
     <div class="container" id="agenda">
         <h1>Agenda</h1>

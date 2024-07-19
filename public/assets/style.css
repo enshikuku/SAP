@@ -687,6 +687,7 @@ button[type="submit"]:hover {
 .contact-section a:hover {
     text-decoration: underline;
 }
+
 .success {
     background-color: #d4edda;
     color: #155724;
@@ -699,21 +700,35 @@ button[type="submit"]:hover {
     font-size: 20px;
     z-index: 2000;
     text-align: center;
+    opacity: 1;
+    transition: opacity 0.9s ease-out;
 }
 
+
 .registration__list {
-    margin: 80px auto;
+    margin: 80px auto 0;
     padding: 20px;
     width: 100%;
+    min-height: 70vh;
     background-color: #f2f2f2;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .registration__list h1 {
     text-align: center;
-    color: #333;
+    color: #167AA0;
     margin-bottom: 20px;
+}
+
+.regs__title button {
+    background-color: #167AA0;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: fixed;
+    top: 80px;
+    right: 5px;
 }
 
 .registration__list table {
@@ -744,5 +759,5 @@ button[type="submit"]:hover {
 .registration__list p {
     text-align: center;
     font-size: 1.2em;
-    color: #777;
+    color: #167AA0;
 }
