@@ -700,3 +700,49 @@ button[type="submit"]:hover {
     z-index: 2000;
     text-align: center;
 }
+
+.registration__list {
+    margin: 100px auto;
+    padding: 20px;
+    width: 100%;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.registration__list h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.registration__list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.registration__list th, .registration__list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.registration__list th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.registration__list tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.registration__list tr:hover {
+    background-color: #ddd;
+}
+
+.registration__list p {
+    text-align: center;
+    font-size: 1.2em;
+    color: #777;
+}
