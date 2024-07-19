@@ -57,7 +57,6 @@ app.post('/validate-passcode', (req, res) => {
     const correctPasscode = process.env.PASSCODE
 
     if (passcode === correctPasscode) {
-        console.log('Passcode is correct')
         const filePath = path.join(process.cwd(), 'form-data.xlsx')
 
         if (!fs.existsSync(filePath)) {
@@ -69,12 +68,9 @@ app.post('/validate-passcode', (req, res) => {
         const registrations = xlsx.utils.sheet_to_json(worksheet)
         res.render('registrations', { registrations, error: false, message: '', errorMessage: '' })
     } else {
-        console.log('Passcode is incorrect')
         return res.render('passcode', { error: true, errorMessage: "Incorrect passcode. Please try again." })
     }
 })
 
 const PORT = 3000
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`)
-})
+app.listen(PORT, () => {console.log(`Server is running on http://localhost:${PORT}`)})
