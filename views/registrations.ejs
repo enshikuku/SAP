@@ -77,9 +77,12 @@
         </div>
     </header>
     <div class="registration__list">
-        <h1>Registrations</h1>
-    <% if (registrations.length > 0) { %>
-        <table>
+        <% if (registrations.length > 0) { %>
+        <div class="regs__title">
+            <h1>Registrations</h1> 
+            <button id="export-btn">Export to Excel</button>
+        </div>
+        <table id="registrations-table">
             <thead>
                 <tr>
                     <% for (let key in registrations[0]) { %>
@@ -97,9 +100,26 @@
                 <% }) %>
             </tbody>
         </table>
-    <% } else { %>
-        <p>No registrations found.</p>
-    <% } %>
+    
+        <script>
+            document.getElementById('export-btn').addEventListener('click', () => {
+                const table = document.getElementById('registrations-table');
+                const rows = Array.from(table.querySelectorAll('tr')).map(row => 
+                    Array.from(row.querySelectorAll('th, td')).map(cell => cell.innerText).join(',')
+                ).join('\n');
+    
+                const blob = new Blob([rows], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'registrations.csv';
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+        </script>
+        <% } else { %>
+            <p>No registrations found.</p>
+        <% } %>
     </div>
         
     <footer>
