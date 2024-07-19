@@ -3,9 +3,12 @@ import bodyParser from 'body-parser';
 import fs from 'fs';
 import path from 'path';
 import xlsx from 'xlsx';
+import serverless from 'serverless-http';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
-const PORT = 3000;
 
 // Serve static files from the "public" directory
 app.use(express.static('public'));
@@ -54,6 +57,15 @@ app.post('/register', (req, res) => {
     res.render('home', { message: 'Your registration is successful! We look forward to seeing you at the event.', success: true });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+
+
+
+if (process.env.NODE_ENV === "dev") {
+    const PORT = 3000;
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
+}
+
+// Export the app to be used by Netlify Functions
+export const handler = serverless(app)
