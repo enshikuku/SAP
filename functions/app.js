@@ -3,37 +3,30 @@ import bodyParser from 'body-parser'
 import fs from 'fs'
 import path from 'path'
 import xlsx from 'xlsx'
-import serverless from 'serverless-http'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
 const app = express()
 
-// Serve static files from the "public" directory
 app.use(express.static('public'))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
 
-// Serve the home page
 app.get('/', (req, res) => {
-    res.render('home', { success: false })
+    res.render('home', { success: false, error: false, message: '', errorMessage: '' })
 })
 
-// Serve the registration page
 app.get('/register', (req, res) => {
-    res.render('register')
+    res.render('register', { error: false })
 })
 
-// Handle form submission
 app.post('/register', (req, res) => {
     const data = req.body
 
-    // Path to the Excel file
     const filePath = path.join(process.cwd(), 'form-data.xlsx')
 
-    // Read the existing Excel file or create a new one
     let workbook
     if (fs.existsSync(filePath)) {
         workbook = xlsx.readFile(filePath)
@@ -52,22 +45,33 @@ app.post('/register', (req, res) => {
 
     xlsx.writeFile(workbook, filePath)
 
-    res.render('home', { message: 'Your registration is successful! We look forward to seeing you at the event.', success: true })
+    res.render('home', { message: 'Your registration is successful! We look forward to seeing you at the event.', success: true, error: false, errorMessage: '' })
 })
 
-// Serve the registrations page
-app.get('/registrations', (req, res) => {
-    const filePath = path.join(process.cwd(), 'form-data.xlsx')
+app.get('/passcode', (req, res) => {
+    res.render('passcode', { error: false, errorMessage: '' })
+})
 
-    if (!fs.existsSync(filePath)) {
-        return res.render('registrations', { registrations: [] })
+app.post('/validate-passcode', (req, res) => {
+    const passcode = req.body.passcode
+    const correctPasscode = process.env.PASSCODE
+
+    if (passcode === correctPasscode) {
+        console.log('Passcode is correct')
+        const filePath = path.join(process.cwd(), 'form-data.xlsx')
+
+        if (!fs.existsSync(filePath)) {
+            return res.render('registrations', { registrations: [], error: false, message: '', errorMessage: '' })
+        }
+
+        const workbook = xlsx.readFile(filePath)
+        const worksheet = workbook.Sheets['Sheet1']
+        const registrations = xlsx.utils.sheet_to_json(worksheet)
+        res.render('registrations', { registrations, error: false, message: '', errorMessage: '' })
+    } else {
+        console.log('Passcode is incorrect')
+        return res.render('passcode', { error: true, errorMessage: "Incorrect passcode. Please try again." })
     }
-
-    const workbook = xlsx.readFile(filePath)
-    const worksheet = workbook.Sheets['Sheet1']
-    const registrations = xlsx.utils.sheet_to_json(worksheet)
-
-    res.render('registrations', { registrations })
 })
 
 const PORT = 3000

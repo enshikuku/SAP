@@ -43,7 +43,7 @@
                     <a onclick="closeNav()" href="#agenda">Agenda</a>
                     <a onclick="closeNav()" href="#speakers">Speakers</a>
                     <a onclick="closeNav()" href="#venue">Venue</a>
-                    <a onclick="closeNav()" href="/registrations">Registrations</a>
+                    <a onclick="closeNav()" href="/passcode">Registrations</a>
                     <script>
                         function closeNav() {
                             const navLinks = document.querySelector('.nav-links')
@@ -78,25 +78,28 @@
             </div>
         </div>
     </header>
-    <% if(success){ %>
-        <p id="success-message" class="success">
-            <strong><%= message %></strong>
+    <% const messageToShow = success ? message : (error ? errorMessage : ''); %>
+    <% const messageClass = success ? 'success' : (error ? 'error' : ''); %>
+
+    <% if (success || error) { %>
+        <p id="message" class="<%= messageClass %>">
+            <strong><%= messageToShow %></strong>
         </p>
         <script>
-            function hideSuccessMessage() {
-                const message = document.getElementById('success-message')
+            function hideMessage() {
+                const message = document.getElementById('message');
                 if (message) {
                     setTimeout(() => {
-                        message.style.opacity = '0'
+                        message.style.opacity = '0';
                         setTimeout(() => {
-                            message.style.display = 'none'
-                        }, 600)
-                    }, 6000)
+                            message.style.display = 'none';
+                        }, 600);
+                    }, 6000);
                 }
             }
-            hideSuccessMessage()
+            hideMessage();
         </script>
-    <% } %>    
+    <% } %>
     <div id="home">
         <div class="home_container">
             <div class="home__ title__">

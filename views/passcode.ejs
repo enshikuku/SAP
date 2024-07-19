@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Event</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navCheck = document.querySelector('#nav-check')
+            const navLinks = document.querySelector('.nav-links')
+
+            const navLinksArray = document.querySelectorAll('.nav-links a')
+            navLinksArray.forEach(link => {
+                link.addEventListener('click', function() {
+                    navCheck.checked = false
+                })
+            })
+
+            navCheck.addEventListener('change', function() {
+                if (navCheck.checked) {
+                    navLinks.style.height = 'calc(100vh - 50px)'
+                    navLinks.style.overflowY = 'auto'
+                } else {
+                    navLinks.style.height = '0'
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <header>
+        <div class="nav">
+            <div class="nav-logo-links">
+                <div class="nav-header">
+                    <div class="nav-title"><a href="/"><img src="assets/images/logo.png" alt=""></a></div>
+                </div>
+                <div class="nav-links">
+                    <a onclick="closeNav()" href="/#home">Home</a>
+                    <a onclick="closeNav()" href="/#about">About</a>
+                    <a onclick="closeNav()" href="/#agenda">Agenda</a>
+                    <a onclick="closeNav()" href="/#speakers">Speakers</a>
+                    <a onclick="closeNav()" href="/#venue">Venue</a>
+                    <script>
+                        function closeNav() {
+                            const navLinks = document.querySelector('.nav-links')
+                            navLinks.style.height = '0'
+                        }
+                    </script>
+                </div>
+            </div>
+            <div class="nav-logo-links">
+                <button id="showButton" class="showButton"><img src="assets/images/chat.png" alt=""></button>
+                <section id="contactSection" class="contact-section">
+                    <h2>Contact Us</h2>
+                    <p>For inquiries, contact us at:</p>
+                    <p>Email: <a href="mailto:info@example.com">info@example.com</a></p>
+                    <p>Phone: <a href="tel:+123456789">+1 234 567 89</a></p>
+                </section>
+                <script>
+                    document.getElementById('showButton').addEventListener('click', function() {
+                    var contactSection = document.getElementById('contactSection');
+                    if (contactSection.style.display === 'none' || contactSection.style.display === '') {
+                        contactSection.style.display = 'block';
+                    } else {
+                        contactSection.style.display = 'none'; 
+                    }
+                    });
+                </script>
+                <div class="nav-btn">
+                    <label for="nav-check"><img src="assets/images/nav.png" alt=""></label>
+                </div>
+                <input type="checkbox" id="nav-check">
+            </div>
+        </div>
+    </header>
+    
+    <div class="passcode-container">
+        <h1>Please Enter the Passcode</h1>
+        <% if (error) { %>
+            <p class="error"><%= errorMessage %></p>
+        <% } %>
+        <form action="/validate-passcode" method="post">
+            <label for="passcode">Passcode:</label>
+            <input type="text" id="passcode" name="passcode" required>
+            <button type="submit">View Registrations</button>
+        </form>
+    </div>
+</body>
+</html>

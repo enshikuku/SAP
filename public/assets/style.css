@@ -688,12 +688,9 @@ button[type="submit"]:hover {
     text-decoration: underline;
 }
 
-.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 2px solid #155724;
+.message {
     padding: 10px;
-    border-radius: 5px; 
+    border-radius: 5px;
     width: 100%;
     position: fixed;
     top: 85px;
@@ -703,6 +700,19 @@ button[type="submit"]:hover {
     opacity: 1;
     transition: opacity 0.9s ease-out;
 }
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 2px solid #155724;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 2px solid #721c24;
+}
+
 
 
 .registration__list {
@@ -760,4 +770,59 @@ button[type="submit"]:hover {
     text-align: center;
     font-size: 1.2em;
     color: #167AA0;
+}
+
+
+.passcode-container {
+    width: 100%;
+    height: 100vh;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.passcode-container h1 {
+    font-size: 24px;
+    color: #167AA0; 
+    margin-bottom: 20px;
+}
+
+.passcode-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.passcode-container label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.passcode-container input[type="text"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.passcode-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #167AA0; 
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.passcode-container button:hover {
+    background-color: #125a80;
 }
